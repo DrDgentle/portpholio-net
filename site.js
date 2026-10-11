@@ -160,53 +160,73 @@ function injectNavigation(pages, settings) {
     navHtml += `<a href="/auth" class="nav-auth-btn">${authLabel}</a>`;
   }
 
-  navContainer.innerHTML = navHtml;
+  // 1. If page uses the modern .site-header
+  const siteHeader = document.querySelector('.site-header');
+  if (siteHeader) {
+    // Sync drawer links dynamically if custom pages exist
+    const drawerCatalogNav = document.querySelector('.drawer-nav');
+    if (drawerCatalogNav && Array.isArray(pages) && pages.length) {
+      pages.filter(p => p.showInNav === 'yes').forEach(p => {
+        const customLink = `/page?slug=${encodeURIComponent(p.slug || p.id)}`;
+        if (!drawerCatalogNav.querySelector(`a[href="${customLink}"]`)) {
+          const a = document.createElement('a');
+          a.className = 'drawer-link';
+          a.href = customLink;
+          a.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg><span>${esc(p.title)}</span>`;
+          drawerCatalogNav.appendChild(a);
+        }
+      });
+    }
+  }
 
-  // Mobile Hamburger Flyout Drawer
+  // 2. If page uses the older .nav container, style it cleanly into modern header bar
   const navHeader = navContainer.closest('.nav');
-  if (navHeader && !navHeader.querySelector('.nav-toggle')) {
-    let backdrop = document.querySelector('.nav-backdrop');
-    if (!backdrop) {
-      backdrop = document.createElement('div');
-      backdrop.className = 'nav-backdrop';
-      document.body.appendChild(backdrop);
+  if (navHeader) {
+    navHeader.style.display = 'flex';
+    navHeader.style.alignItems = 'center';
+    navHeader.style.justifyContent = 'space-between';
+    navHeader.style.background = '#ffffff';
+    navHeader.style.border = '1px solid var(--border-light)';
+    navHeader.style.borderRadius = 'var(--radius-lg)';
+    navHeader.style.padding = '12px 20px';
+    navHeader.style.boxShadow = 'var(--shadow-sm)';
+    navHeader.style.marginBottom = '28px';
+
+    const brandEl = navHeader.querySelector('.brand');
+    if (brandEl) {
+      brandEl.style.display = 'flex';
+      brandEl.style.alignItems = 'center';
+      brandEl.style.gap = '8px';
+      brandEl.style.color = 'var(--text-dark)';
+      brandEl.style.fontFamily = 'var(--font-display)';
+      brandEl.style.fontWeight = '700';
+      brandEl.style.fontSize = '1.2rem';
     }
 
-    const toggleBtn = document.createElement('button');
-    toggleBtn.className = 'nav-toggle';
-    toggleBtn.type = 'button';
-    toggleBtn.setAttribute('aria-label', 'Toggle Navigation Menu');
-    toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
-
-    function closeFlyout() {
-      navContainer.classList.remove('open');
-      backdrop.classList.remove('open');
-      document.body.style.overflow = '';
-      toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
-    }
-
-    function openFlyout() {
-      navContainer.classList.add('open');
-      backdrop.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
-    }
-
-    toggleBtn.onclick = function() {
-      if (navContainer.classList.contains('open')) {
-        closeFlyout();
-      } else {
-        openFlyout();
-      }
-    };
-
-    backdrop.onclick = closeFlyout;
+    navContainer.style.display = 'flex';
+    navContainer.style.gap = '8px';
+    navContainer.style.flexWrap = 'wrap';
+    navContainer.style.alignItems = 'center';
 
     navContainer.querySelectorAll('a').forEach(a => {
-      a.onclick = closeFlyout;
+      a.style.color = 'var(--text-dark-secondary)';
+      a.style.textDecoration = 'none';
+      a.style.fontWeight = '500';
+      a.style.fontSize = '0.92rem';
+      a.style.padding = '8px 14px';
+      a.style.borderRadius = 'var(--radius-md)';
+      if (a.getAttribute('aria-current') === 'page') {
+        a.style.color = '#ffffff';
+        a.style.background = 'var(--purple-button)';
+      }
     });
 
-    navHeader.appendChild(toggleBtn);
+    const authBtn = navContainer.querySelector('.nav-auth-btn');
+    if (authBtn) {
+      authBtn.style.color = '#ffffff';
+      authBtn.style.background = 'var(--purple-button)';
+      authBtn.style.boxShadow = '0 4px 14px var(--purple-glow)';
+    }
   }
 }
 

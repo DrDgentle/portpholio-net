@@ -11,7 +11,11 @@ const safeUrl = u => /^https?:\/\//i.test(u || '') ? u : '';
 // User session management
 function getActiveUser() {
   try {
-    return JSON.parse(localStorage.getItem('currentUser') || 'null');
+    const raw = localStorage.getItem('currentUser');
+    if (!raw) return null;
+    const u = JSON.parse(raw);
+    if (!u || typeof u !== 'object' || !u.email) return null;
+    return u;
   } catch (e) {
     return null;
   }
@@ -25,6 +29,86 @@ function setActiveUser(userData, token) {
 function clearActiveUser() {
   localStorage.removeItem('currentUser');
   localStorage.removeItem('userToken');
+}
+
+// Global UI synchronization for Authentication & Navigation
+function syncAuthUi() {
+  const u = getActiveUser();
+
+  // All user header links
+  document.querySelectorAll('.user-header-link, #userHeaderLink, .header-icon-btn').forEach(el => {
+    // Only adjust if it's the portal icon button (has svg with user/person path or auth/user in href)
+    if (el.getAttribute('href') && (el.getAttribute('href').includes('user-dashboard') || el.getAttribute('href').includes('auth') || el.classList.contains('user-header-link') || el.id === 'userHeaderLink')) {
+      if (u) {
+        el.href = '/user-dashboard';
+        el.setAttribute('title', (u.name || 'Member') + ' — Portal');
+        el.setAttribute('aria-label', 'Member Portal');
+      } else {
+        el.href = '/auth';
+        el.setAttribute('title', 'Sign In / Register');
+        el.setAttribute('aria-label', 'Sign In or Register');
+      }
+    }
+  });
+
+  // Drawer Auth Elements
+  const drawerDisplay = document.getElementById('drawerUserDisplay');
+  const drawerSignOut = document.getElementById('drawerSignOutBtn');
+  const drawerSignIn = document.getElementById('drawerSignInLink');
+  const drawerAuthLink = document.getElementById('drawerAuthLink');
+  const drawerUserName = document.getElementById('drawerUserName');
+  const drawerUserEmail = document.getElementById('drawerUserEmail');
+
+  if (u) {
+    if (drawerDisplay) drawerDisplay.style.display = 'flex';
+    if (drawerSignOut) drawerSignOut.style.display = 'flex';
+    if (drawerSignIn) drawerSignIn.style.display = 'none';
+    if (drawerUserName) drawerUserName.textContent = u.name || 'Member';
+    if (drawerUserEmail) drawerUserEmail.textContent = u.email;
+    if (drawerAuthLink) {
+      drawerAuthLink.href = '/user-dashboard';
+      const label = drawerAuthLink.querySelector('span');
+      if (label) label.textContent = 'Member Dashboard';
+    }
+  } else {
+    if (drawerDisplay) drawerDisplay.style.display = 'none';
+    if (drawerSignOut) drawerSignOut.style.display = 'none';
+    if (drawerSignIn) drawerSignIn.style.display = 'inline-flex';
+    if (drawerAuthLink) {
+      drawerAuthLink.href = '/auth';
+      const label = drawerAuthLink.querySelector('span');
+      if (label) label.textContent = 'Sign In / Register';
+    }
+  }
+
+  if (drawerSignOut) {
+    drawerSignOut.onclick = function() {
+      clearActiveUser();
+      window.location.reload();
+    };
+  }
+}
+
+function initFlyoutDrawer() {
+  const openBtn = document.getElementById('openDrawerBtn');
+  const closeBtn = document.getElementById('closeDrawerBtn');
+  const drawer = document.getElementById('sideDrawer');
+  const backdrop = document.getElementById('drawerBackdrop');
+
+  function openDrawer() {
+    if (drawer) drawer.classList.add('open');
+    if (backdrop) backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    if (drawer) drawer.classList.remove('open');
+    if (backdrop) backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  if (openBtn) openBtn.onclick = openDrawer;
+  if (closeBtn) closeBtn.onclick = closeDrawer;
+  if (backdrop) backdrop.onclick = closeDrawer;
 }
 
 // Markdown parser
@@ -456,6 +540,8 @@ function initInteractiveMotion() {
 // Boot
 async function boot() {
   initInteractiveMotion();
+  initFlyoutDrawer();
+  syncAuthUi();
 
   try {
     const cached = JSON.parse(sessionStorage.getItem('pub_cache_v3') || 'null');
@@ -469,6 +555,7 @@ async function boot() {
     if (fresh && fresh.ok) {
       sessionStorage.setItem('pub_cache_v3', JSON.stringify(fresh));
       applyPublic(fresh);
+      syncAuthUi();
     }
   } catch (e) {
     console.warn('Backend sync error:', e);
@@ -476,5 +563,9 @@ async function boot() {
 }
 
 if (document.body.dataset.page !== 'admin') {
-  boot();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
 }

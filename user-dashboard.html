@@ -8,6 +8,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
+<!-- Immediate synchronous auth protection gate -->
+<script>
+(function() {
+  try {
+    var raw = localStorage.getItem('currentUser');
+    if (!raw) {
+      window.location.replace('/auth');
+      return;
+    }
+    var user = JSON.parse(raw);
+    if (!user || !user.email) {
+      localStorage.removeItem('currentUser');
+      localStorage.removeItem('userToken');
+      window.location.replace('/auth');
+    }
+  } catch (err) {
+    window.location.replace('/auth');
+  }
+})();
+</script>
 </head>
 <body data-page="user-dashboard">
 
@@ -15,21 +35,27 @@
 <div class="bg-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
 <div class="bg-grid" aria-hidden="true"></div>
 
-<div class="wrap">
-  <header class="nav glass">
-    <a class="brand" href="/" data-s="companyName">
-      <span class="brand-dot"></span>
-      Portfolio
-    </a>
-    <nav aria-label="Main">
-      <a href="/">Home</a>
-      <a href="/projects">Portfolio</a>
-      <a href="/blog">Blog</a>
-      <a href="/contact">Contact</a>
-    </nav>
-  </header>
+<!-- Modern Top Header -->
+<header class="site-header">
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:14px">
+      <a href="/" class="brand-group">
+        <div class="brand-icon-box">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+        </div>
+        <span class="brand-title" data-s="companyName">Portfolio</span>
+      </a>
+    </div>
+    <div class="header-actions">
+      <a href="/" class="btn ghost sm"><span>&larr; Public Site</span></a>
+      <button id="logoutBtnTop" class="btn ghost danger sm" type="button">Sign Out</button>
+    </div>
+  </div>
+</header>
 
-  <main>
+<div class="wrap">
+  <!-- Hidden by default until verified -->
+  <main id="dashMain" style="display:none;margin-top:20px">
     <div class="dash-topbar">
       <div>
         <span class="badge">Client & Member Area</span>
@@ -100,17 +126,27 @@
 <script src="/site.js"></script>
 <script>
 var u = getActiveUser();
-if (!u) {
-  window.location.href = '/auth';
+if (!u || !u.email) {
+  clearActiveUser();
+  window.location.replace('/auth');
 } else {
-  document.getElementById('welcomeUser').textContent = 'Welcome, ' + u.name;
-  document.getElementById('userEmailDisplay').textContent = u.email;
+  var dm = document.getElementById('dashMain');
+  if (dm) dm.style.display = 'block';
+  var wEl = document.getElementById('welcomeUser');
+  if (wEl) wEl.textContent = 'Welcome, ' + (u.name || 'Member');
+  var emEl = document.getElementById('userEmailDisplay');
+  if (emEl) emEl.textContent = u.email;
 }
 
-document.getElementById('logoutBtn').onclick = function() {
+function doLogout() {
   clearActiveUser();
   window.location.href = '/';
-};
+}
+
+var lo = document.getElementById('logoutBtn');
+if (lo) lo.onclick = doLogout;
+var loTop = document.getElementById('logoutBtnTop');
+if (loTop) loTop.onclick = doLogout;
 </script>
 </body>
 </html>

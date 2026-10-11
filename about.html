@@ -3,34 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>About | Dgen Tools</title>
+<title>About Me | Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 </head>
 <body data-page="about">
 
-<!-- Top SaaS Header -->
+<canvas id="bgCanvas"></canvas>
+<div class="bg-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="bg-grid" aria-hidden="true"></div>
+
+<!-- Top Modern Header -->
 <header class="site-header">
   <div class="header-inner">
     <div style="display:flex;align-items:center;gap:14px">
-      <button class="hamburger-btn" id="openDrawerBtn" type="button" aria-label="Open Menu">
+      <button class="hamburger-btn" id="openDrawerBtn" type="button" aria-label="Open Navigation Menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       </button>
       <a href="/" class="brand-group">
         <div class="brand-icon-box">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
         </div>
-        <span class="brand-title" data-s="companyName">Dgen Tools</span>
+        <span class="brand-title" data-s="companyName">Portfolio</span>
       </a>
     </div>
     <div class="header-actions">
-      <a href="/projects" class="header-icon-btn" title="Catalog">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-        <span class="header-badge">3</span>
-      </a>
-      <a href="/user-dashboard" class="header-icon-btn" title="Account Portal">
+      <a href="/auth" id="userHeaderLink" class="header-icon-btn user-header-link" title="Sign In / Register">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
       </a>
     </div>
@@ -74,7 +74,7 @@
 
   <footer class="footer">
     <div id="social" class="social"></div>
-    <p>&copy; 2026 <span data-s="companyName">Dgen Tools</span>. All rights reserved.</p>
+    <p>&copy; 2026 <span data-s="companyName">Portfolio</span>. All rights reserved.</p>
   </footer>
 </div>
 
@@ -86,22 +86,22 @@
       <div class="brand-icon-box" style="width:36px;height:36px">
         <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
       </div>
-      <span class="brand-title" style="color:#ffffff;font-size:1.15rem" data-s="companyName">Dgen Tools</span>
+      <span class="brand-title" style="color:#ffffff;font-size:1.15rem" data-s="companyName">Portfolio</span>
     </div>
     <button class="drawer-close-btn" id="closeDrawerBtn" type="button" aria-label="Close Menu">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </button>
   </div>
 
-  <span class="drawer-section-label">PORTFOLIO & TOOLS</span>
+  <span class="drawer-section-label">EXPLORE & PORTFOLIO</span>
   <nav class="drawer-nav">
     <a href="/" class="drawer-link">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-      <span>Home / Dashboard</span>
+      <span>Home</span>
     </a>
     <a href="/projects" class="drawer-link">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-      <span>Browse Catalog</span>
+      <span>Featured Projects</span>
     </a>
     <a href="/about" class="drawer-link active" aria-current="page">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
@@ -113,36 +113,46 @@
     </a>
     <a href="/contact" class="drawer-link amber-highlight">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-      <span>Contact Support</span>
+      <span>Get in Touch</span>
     </a>
   </nav>
 
-  <span class="drawer-section-label">ADMIN & MANAGEMENT</span>
+  <span class="drawer-section-label">MANAGEMENT & PORTAL</span>
   <nav class="drawer-nav">
     <a href="/admin" class="drawer-link">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-      <span>Metrics & Overview</span>
+      <span>Admin Control Panel</span>
     </a>
-    <a href="/admin" class="drawer-link">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-      <span>Products Catalog</span>
-    </a>
-    <a href="/auth" class="drawer-link">
+    <a href="/auth" class="drawer-link" id="drawerAuthLink">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
-      <span>Members & Users</span>
+      <span>Member Portal / Sign In</span>
     </a>
   </nav>
+
+  <div class="drawer-footer">
+    <div id="drawerUserDisplay" class="drawer-user-card" style="display:none">
+      <div class="drawer-user-info">
+        <div class="brand-icon-box" style="width:34px;height:34px;border-radius:50%">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </div>
+        <div>
+          <strong id="drawerUserName">User</strong>
+          <small id="drawerUserEmail">user@example.com</small>
+        </div>
+      </div>
+    </div>
+
+    <button id="drawerSignOutBtn" class="btn-drawer-signout" type="button" style="display:none">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+      <span>Sign Out</span>
+    </button>
+
+    <a href="/auth" id="drawerSignInLink" class="btn" style="width:100%;text-align:center">
+      <span>Sign In / Register</span>
+    </a>
+  </div>
 </aside>
 
 <script src="/site.js"></script>
-<script>
-var openBtn = document.getElementById('openDrawerBtn');
-var closeBtn = document.getElementById('closeDrawerBtn');
-var drawer = document.getElementById('sideDrawer');
-var backdrop = document.getElementById('drawerBackdrop');
-if (openBtn) openBtn.onclick = function() { drawer.classList.add('open'); backdrop.classList.add('open'); };
-if (closeBtn) closeBtn.onclick = function() { drawer.classList.remove('open'); backdrop.classList.remove('open'); };
-if (backdrop) backdrop.onclick = function() { drawer.classList.remove('open'); backdrop.classList.remove('open'); };
-</script>
 </body>
 </html>

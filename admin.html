@@ -436,9 +436,13 @@ async function load() {
 }
 
 async function start() {
-  $('login').hidden = true;
-  $('dash').hidden = false;
-  try { await load(); } catch (e) {}
+  try {
+    await load();
+    $('login').hidden = true;
+    $('dash').hidden = false;
+  } catch (e) {
+    logout();
+  }
 }
 
 // Admin login form
@@ -678,7 +682,11 @@ document.addEventListener('click', async function(e) {
   } catch (x) {}
 });
 
-if (T) start();
+if (T) {
+  start();
+} else {
+  logout();
+}
 </script>
 </body>
 </html>

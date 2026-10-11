@@ -3,36 +3,43 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Page | DgentleMedTech</title>
+<title>Page | Dgen Tools</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 </head>
 <body data-page="custom-page">
 
-<!-- Background Reactive Motion & Aurora Orbs -->
-<canvas id="bgCanvas"></canvas>
-<div class="bg-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
-<div class="bg-grid" aria-hidden="true"></div>
+<!-- Top SaaS Header -->
+<header class="site-header">
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:14px">
+      <button class="hamburger-btn" id="openDrawerBtn" type="button" aria-label="Open Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+      <a href="/" class="brand-group">
+        <div class="brand-icon-box">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+        </div>
+        <span class="brand-title" data-s="companyName">Dgen Tools</span>
+      </a>
+    </div>
+    <div class="header-actions">
+      <a href="/projects" class="header-icon-btn" title="Catalog">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+        <span class="header-badge">3</span>
+      </a>
+      <a href="/user-dashboard" class="header-icon-btn" title="Account Portal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      </a>
+    </div>
+  </div>
+</header>
 
 <div class="wrap">
-  <header class="nav glass">
-    <a class="brand" href="/" data-s="companyName">
-      <span class="brand-dot"></span>
-      DgentleMedTech
-    </a>
-    <nav aria-label="Main">
-      <a href="/">Home</a>
-      <a href="/about">About</a>
-      <a href="/projects">Projects</a>
-      <a href="/blog">Blog</a>
-      <a href="/contact">Contact</a>
-    </nav>
-  </header>
-
-  <main>
-    <section id="singlePageContainer" class="glass panel">
+  <main style="max-width:820px;margin:20px auto 0">
+    <section id="singlePageContainer" class="panel">
       <div style="text-align:center;padding:40px 0;">
         <p>Loading page content...</p>
       </div>
@@ -41,10 +48,75 @@
 
   <footer class="footer">
     <div id="social" class="social"></div>
-    <p>&copy; 2026 <span data-s="companyName">DgentleMedTech</span>. Clinical-grade engineering for healthcare environments.</p>
+    <p>&copy; 2026 <span data-s="companyName">Dgen Tools</span>. All rights reserved.</p>
   </footer>
 </div>
 
+<!-- Reusable Flyout Side Drawer -->
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<aside class="side-drawer" id="sideDrawer">
+  <div class="drawer-header">
+    <div class="brand-group">
+      <div class="brand-icon-box" style="width:36px;height:36px">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+      </div>
+      <span class="brand-title" style="color:#ffffff;font-size:1.15rem" data-s="companyName">Dgen Tools</span>
+    </div>
+    <button class="drawer-close-btn" id="closeDrawerBtn" type="button" aria-label="Close Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+  </div>
+
+  <span class="drawer-section-label">PORTFOLIO & TOOLS</span>
+  <nav class="drawer-nav">
+    <a href="/" class="drawer-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+      <span>Home / Dashboard</span>
+    </a>
+    <a href="/projects" class="drawer-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+      <span>Browse Catalog</span>
+    </a>
+    <a href="/about" class="drawer-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>About Me</span>
+    </a>
+    <a href="/blog" class="drawer-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+      <span>Articles & Guides</span>
+    </a>
+    <a href="/contact" class="drawer-link amber-highlight">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      <span>Contact Support</span>
+    </a>
+  </nav>
+
+  <span class="drawer-section-label">ADMIN & MANAGEMENT</span>
+  <nav class="drawer-nav">
+    <a href="/admin" class="drawer-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+      <span>Metrics & Overview</span>
+    </a>
+    <a href="/admin" class="drawer-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+      <span>Products Catalog</span>
+    </a>
+    <a href="/auth" class="drawer-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+      <span>Members & Users</span>
+    </a>
+  </nav>
+</aside>
+
 <script src="/site.js"></script>
+<script>
+var openBtn = document.getElementById('openDrawerBtn');
+var closeBtn = document.getElementById('closeDrawerBtn');
+var drawer = document.getElementById('sideDrawer');
+var backdrop = document.getElementById('drawerBackdrop');
+if (openBtn) openBtn.onclick = function() { drawer.classList.add('open'); backdrop.classList.add('open'); };
+if (closeBtn) closeBtn.onclick = function() { drawer.classList.remove('open'); backdrop.classList.remove('open'); };
+if (backdrop) backdrop.onclick = function() { drawer.classList.remove('open'); backdrop.classList.remove('open'); };
+</script>
 </body>
 </html>

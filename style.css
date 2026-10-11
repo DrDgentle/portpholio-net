@@ -194,6 +194,8 @@ body {
   padding: 14px 28px;
   margin-bottom: 48px;
   border-radius: var(--radius-full);
+  position: relative;
+  z-index: 50;
 }
 
 .brand {
@@ -206,6 +208,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .brand-dot {
@@ -238,6 +241,7 @@ body {
   font-weight: 500;
   font-size: 0.92rem;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .nav nav a:hover {
@@ -262,6 +266,26 @@ body {
   background: var(--gold-hover) !important;
   color: var(--gold-ink) !important;
   transform: translateY(-1px);
+}
+
+/* Mobile Toggle Hamburger Button */
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: 0;
+  color: var(--gold);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-toggle svg {
+  width: 24px;
+  height: 24px;
 }
 
 /* ==========================================================================
@@ -1097,7 +1121,7 @@ input:checked + .slider:before {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .wrap {
     padding: 14px 14px 50px;
   }
@@ -1106,22 +1130,45 @@ input:checked + .slider:before {
     border-radius: var(--radius-lg);
   }
   .nav {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 12px 16px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
     margin-bottom: 24px;
-    gap: 12px;
+    border-radius: var(--radius-lg);
   }
-  .nav .brand {
-    justify-content: center;
+  .nav-toggle {
+    display: inline-flex;
   }
   .nav nav {
-    justify-content: center;
-    gap: 4px;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    background: rgba(26, 6, 10, 0.98);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(24px);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+    gap: 8px;
+    display: none;
+  }
+  .nav nav.open {
+    display: flex;
+    animation: slideNav 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  @keyframes slideNav {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
   }
   .nav nav a {
-    padding: 6px 12px;
-    font-size: 0.84rem;
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    text-align: center;
   }
   h1 {
     font-size: 2.1rem;

@@ -156,12 +156,31 @@ function injectNavigation(pages, settings) {
   if (currentUser) {
     navHtml += `<a href="/user-dashboard" class="nav-auth-btn">${esc(currentUser.name.split(' ')[0])}'s Portal</a>`;
   } else {
-    // If registration is turned ON by admin, show "Sign In / Join"; if OFF, show "Sign In"
     const authLabel = (settings && settings.allowUserRegistration === 'yes') ? 'Account' : 'Sign In';
     navHtml += `<a href="/auth" class="nav-auth-btn">${authLabel}</a>`;
   }
 
   navContainer.innerHTML = navHtml;
+
+  // Mobile Hamburger Toggle
+  const navHeader = navContainer.closest('.nav');
+  if (navHeader && !navHeader.querySelector('.nav-toggle')) {
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'nav-toggle';
+    toggleBtn.type = 'button';
+    toggleBtn.setAttribute('aria-label', 'Toggle Menu');
+    toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+    
+    toggleBtn.onclick = function() {
+      navContainer.classList.toggle('open');
+      if (navContainer.classList.contains('open')) {
+        toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+      } else {
+        toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+      }
+    };
+    navHeader.appendChild(toggleBtn);
+  }
 }
 
 // Apply public settings & content

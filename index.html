@@ -3,20 +3,210 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Portfolio & Fullstack Solutions</title>
-<meta name="description" content="Discover my portfolio, software tools, client applications, and fullstack engineering capabilities.">
+<title>Portfolio & Engineering Showcase</title>
+<meta name="description" content="Personal portfolio and software showcase. Explore client projects, web applications, and developer tools.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
+<style>
+/* Refined Clean Portfolio Hero & Sections */
+.home-hero-wrap {
+  padding: 30px 0 10px;
+}
+
+.home-intro-card {
+  background: var(--bg-night-gradient);
+  border-radius: var(--radius-xl);
+  padding: clamp(32px, 5vw, 56px);
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-night);
+  border: 1px solid var(--border-night);
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.home-intro-card::after {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--purple-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.home-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 18px;
+}
+
+.home-hero-badge .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-emerald);
+  box-shadow: 0 0 10px var(--accent-emerald);
+}
+
+.home-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #ffffff;
+  margin-bottom: 14px;
+}
+
+.home-hero-text {
+  color: var(--text-light-secondary);
+  font-size: 1.08rem;
+  line-height: 1.7;
+  margin-bottom: 26px;
+}
+
+.home-hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* Right Side Quick Summary Card */
+.home-side-stat-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.home-stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.home-stat-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  background: var(--purple-button);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.home-stat-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.home-stat-text strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #ffffff;
+}
+
+.home-stat-text small {
+  color: var(--text-light-muted);
+  font-size: 0.8rem;
+}
+
+/* Feature Highlights Grid */
+.features-three-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 36px 0 44px;
+}
+
+.feature-box {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-box:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--purple-electric);
+}
+
+.feature-box-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-md);
+  background: var(--purple-subtle);
+  color: var(--purple-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.feature-box-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.feature-box h3 {
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+.feature-box p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .home-intro-card {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .features-three-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+</style>
 </head>
 <body data-page="home">
 
-<!-- 1. TOP HEADER (Exact Match to Reference Screenshot) -->
+<!-- 1. CLEAN MODERN HEADER -->
 <header class="site-header">
   <div class="header-inner">
     <div style="display:flex;align-items:center;gap:14px">
-      <!-- Hamburger Toggle for Flyout Side Drawer -->
+      <!-- Hamburger Toggle for Flyout Drawer -->
       <button class="hamburger-btn" id="openDrawerBtn" type="button" aria-label="Open Navigation Menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       </button>
@@ -26,15 +216,14 @@
         <div class="brand-icon-box">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
         </div>
-        <span class="brand-title" data-s="companyName">Dgentle Tools</span>
+        <span class="brand-title" data-s="companyName">Portfolio</span>
       </a>
     </div>
 
-    <!-- Right Header Actions (Bell, Avatar, Portal) -->
+    <!-- Header Actions (Portfolio Link & Account Portal) -->
     <div class="header-actions">
-      <a href="/projects" class="header-icon-btn" title="Notifications">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-        <span class="header-badge">3</span>
+      <a href="/projects" class="btn ghost sm" style="display:none;@media(min-width:600px){display:inline-flex}">
+        <span>Portfolio &rarr;</span>
       </a>
       <a href="/user-dashboard" id="userHeaderLink" class="header-icon-btn" title="Account Portal">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
@@ -43,80 +232,123 @@
   </div>
 </header>
 
-<!-- 2. TICKER ANNOUNCEMENT PILL (Matching Reference) -->
-<div style="padding:0 16px">
-  <div class="ticker-pill">
-    <div class="ticker-left">
-      <span style="font-weight:600;color:var(--purple-primary)">Latest Updates:</span>
-      <span data-s="tagline">Explore fullstack web solutions, API architectures, and live project demos.</span>
-    </div>
-    <div class="ticker-right">
-      <span class="ticker-dot"></span>
-      <span>Verified</span>
-    </div>
-  </div>
-</div>
-
 <div class="wrap">
   <main>
-    <!-- 3. HERO DEEP NIGHT PURPLE CARD (Exact Match to Reference Screenshot) -->
-    <section class="hero-night-card">
-      <div class="status-chip">
-        <span class="status-chip-dot"></span>
-        <span>Active Portfolio</span>
-      </div>
+    <!-- 2. REFINED HOMEPAGE HERO CARD -->
+    <section class="home-hero-wrap">
+      <div class="home-intro-card">
+        <div>
+          <div class="home-hero-badge">
+            <span class="dot"></span>
+            <span>Fullstack Engineer & Designer</span>
+          </div>
 
-      <h1 class="hero-night-title" data-s="heroTitle">Welcome to My Portfolio</h1>
-      <p class="hero-night-sub" data-s="heroText">
-        I design and build software systems, web applications, and intuitive digital tools. Explore my featured projects or request custom engineering.
-      </p>
+          <h1 class="home-hero-title" data-s="heroTitle">Crafting High-Performance Digital Experiences</h1>
+          <p class="home-hero-text" data-s="heroText">
+            Welcome to my portfolio. I engineer scalable web applications, robust cloud APIs, and intuitive user interfaces tailored for client success.
+          </p>
 
-      <div class="hero-nested-box">
-        <small>Engineering Availability</small>
-        <strong>Accepting New Projects & Collaborations</strong>
-      </div>
+          <div class="home-hero-actions">
+            <a class="btn-amber" href="/projects">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <span>Explore My Portfolio</span>
+            </a>
+            <a class="btn ghost" href="/contact" style="background:rgba(255,255,255,0.12);color:#ffffff;border:1px solid rgba(255,255,255,0.2)">
+              <span>Contact Me &rarr;</span>
+            </a>
+          </div>
+        </div>
 
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <a class="btn-amber" href="/projects">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-          <span>Explore Works & Catalog</span>
-        </a>
-        <a class="btn ghost" href="/contact" style="background:rgba(255,255,255,0.12);color:#ffffff;border:1px solid rgba(255,255,255,0.2)">
-          <span>Get in Touch &rarr;</span>
-        </a>
+        <!-- Right Quick Info Card -->
+        <div class="home-side-stat-box">
+          <div class="home-stat-pill">
+            <div class="home-stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            </div>
+            <div class="home-stat-text">
+              <strong>Web Architecture</strong>
+              <small>Fullstack SaaS & Cloud APIs</small>
+            </div>
+          </div>
+
+          <div class="home-stat-pill">
+            <div class="home-stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+            </div>
+            <div class="home-stat-text">
+              <strong>Interactive UI/UX</strong>
+              <small>Responsive & Ergonomic Design</small>
+            </div>
+          </div>
+
+          <div class="home-stat-pill">
+            <div class="home-stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <div class="home-stat-text">
+              <strong>Reliable Engineering</strong>
+              <small>Tested, Maintainable Code</small>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- FEATURED PORTFOLIO GRID -->
+    <!-- 3. THREE CORE PILLARS (Clean Homepage Structure) -->
+    <div class="features-three-grid">
+      <div class="feature-box">
+        <div class="feature-box-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+        </div>
+        <h3>Custom Applications</h3>
+        <p>Production-ready web apps engineered with modern frontend frameworks and scalable serverless architecture.</p>
+      </div>
 
-    <!-- 5. FEATURED PORTFOLIO GRID -->
+      <div class="feature-box">
+        <div class="feature-box-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        </div>
+        <h3>APIs & Automations</h3>
+        <p>Seamless integrations, automated Google Apps Script workflows, and webhooks connecting your services.</p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-box-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <h3>Secure & Compliant</h3>
+        <p>Built with enterprise security standards, hashed authentication, and privacy-first data handling.</p>
+      </div>
+    </div>
+
+    <!-- 4. FEATURED PORTFOLIO HIGHLIGHTS -->
     <div class="section-heading-row">
       <div class="section-title-wrap">
         <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
         <h2>Featured Portfolio Items</h2>
       </div>
-      <a href="/projects" style="color:var(--purple-primary);font-weight:600;text-decoration:none">View all &rarr;</a>
+      <a href="/projects" style="color:var(--purple-primary);font-weight:600;text-decoration:none">View All Works &rarr;</a>
     </div>
     <section id="projects" class="grid" data-featured="1" data-limit="3"></section>
 
-    <!-- 6. LATEST ARTICLES -->
-    <div class="section-heading-row" style="margin-top:40px">
+    <!-- 5. LATEST ARTICLES -->
+    <div class="section-heading-row" style="margin-top:50px">
       <div class="section-title-wrap">
         <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-        <h2>Latest Insights & Blog</h2>
+        <h2>Latest Research & Articles</h2>
       </div>
-      <a href="/blog" style="color:var(--purple-primary);font-weight:600;text-decoration:none">View all &rarr;</a>
+      <a href="/blog" style="color:var(--purple-primary);font-weight:600;text-decoration:none">View All Articles &rarr;</a>
     </div>
     <section id="blogPosts" class="grid" data-featured="1" data-limit="3"></section>
   </main>
 
   <footer class="footer">
     <div id="social" class="social"></div>
-    <p>&copy; 2026 <span data-s="companyName">Dgentle Tools</span>. All rights reserved.</p>
+    <p>&copy; 2026 <span data-s="companyName">Portfolio</span>. All rights reserved.</p>
   </footer>
 </div>
 
-<!-- 7. FLYOUT SIDE DRAWER (Exact Match to Reference Screenshot) -->
+<!-- 6. SIDE FLYOUT DRAWER -->
 <div class="drawer-backdrop" id="drawerBackdrop"></div>
 <aside class="side-drawer" id="sideDrawer">
   <div class="drawer-header">
@@ -124,22 +356,22 @@
       <div class="brand-icon-box" style="width:36px;height:36px">
         <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
       </div>
-      <span class="brand-title" style="color:#ffffff;font-size:1.15rem" data-s="companyName">Dgen Tools</span>
+      <span class="brand-title" style="color:#ffffff;font-size:1.15rem" data-s="companyName">Portfolio</span>
     </div>
     <button class="drawer-close-btn" id="closeDrawerBtn" type="button" aria-label="Close Menu">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </button>
   </div>
 
-  <span class="drawer-section-label">PORTFOLIO & TOOLS</span>
+  <span class="drawer-section-label">PORTFOLIO & WORK</span>
   <nav class="drawer-nav">
     <a href="/" class="drawer-link active" aria-current="page">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-      <span>Home / Dashboard</span>
+      <span>Home</span>
     </a>
     <a href="/projects" class="drawer-link">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-      <span>Browse Catalog</span>
+      <span>Portfolio Showcase</span>
     </a>
     <a href="/about" class="drawer-link">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
@@ -151,23 +383,19 @@
     </a>
     <a href="/contact" class="drawer-link amber-highlight">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-      <span>Contact Support</span>
+      <span>Get in Touch</span>
     </a>
   </nav>
 
-  <span class="drawer-section-label">ADMIN & MANAGEMENT</span>
+  <span class="drawer-section-label">MANAGEMENT & PORTAL</span>
   <nav class="drawer-nav">
     <a href="/admin" class="drawer-link">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-      <span>Metrics & Overview</span>
-    </a>
-    <a href="/admin" class="drawer-link">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-      <span>Products Catalog</span>
+      <span>Admin Control Panel</span>
     </a>
     <a href="/auth" class="drawer-link">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
-      <span>Members & Users</span>
+      <span>Member Portal / Sign In</span>
     </a>
   </nav>
 
@@ -203,23 +431,14 @@ var closeBtn = document.getElementById('closeDrawerBtn');
 var drawer = document.getElementById('sideDrawer');
 var backdrop = document.getElementById('drawerBackdrop');
 
-function openDrawer() {
-  drawer.classList.add('open');
-  backdrop.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeDrawer() {
-  drawer.classList.remove('open');
-  backdrop.classList.remove('open');
-  document.body.style.overflow = '';
-}
+function openDrawer() { drawer.classList.add('open'); backdrop.classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeDrawer() { drawer.classList.remove('open'); backdrop.classList.remove('open'); document.body.style.overflow = ''; }
 
 if (openBtn) openBtn.onclick = openDrawer;
 if (closeBtn) closeBtn.onclick = closeDrawer;
 if (backdrop) backdrop.onclick = closeDrawer;
 
-// Check user state
+// User state check
 var currentUser = getActiveUser();
 if (currentUser) {
   var display = document.getElementById('drawerUserDisplay');

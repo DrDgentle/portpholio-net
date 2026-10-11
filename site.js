@@ -244,10 +244,17 @@ function injectNavigation(pages, settings) {
     navHtml += `<a href="/auth" class="nav-auth-btn">${authLabel}</a>`;
   }
 
-  // 1. If page uses the modern .site-header
+  // 1. Ingest Desktop Navigation Links into .site-header
+  const desktopNavContainers = document.querySelectorAll('.desktop-nav');
+  if (desktopNavContainers.length) {
+    desktopNavContainers.forEach(container => {
+      container.innerHTML = navHtml;
+    });
+  }
+
+  // 2. If page uses the modern .site-header, sync custom CMS pages to drawer
   const siteHeader = document.querySelector('.site-header');
   if (siteHeader) {
-    // Sync drawer links dynamically if custom pages exist
     const drawerCatalogNav = document.querySelector('.drawer-nav');
     if (drawerCatalogNav && Array.isArray(pages) && pages.length) {
       pages.filter(p => p.showInNav === 'yes').forEach(p => {

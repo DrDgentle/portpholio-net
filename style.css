@@ -147,6 +147,59 @@ body {
   letter-spacing: -0.02em;
 }
 
+/* Desktop Navigation Links */
+.desktop-nav {
+  display: none;
+  align-items: center;
+  gap: 6px;
+}
+
+.desktop-nav a {
+  color: var(--text-dark-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.93rem;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+.desktop-nav a:hover {
+  color: var(--purple-primary);
+  background: var(--purple-subtle);
+}
+
+.desktop-nav a.active,
+.desktop-nav a[aria-current="page"] {
+  color: var(--purple-primary);
+  background: var(--purple-subtle);
+  font-weight: 600;
+}
+
+/* On Desktop (901px+): show desktop navbar, hide hamburger drawer toggle */
+@media (min-width: 901px) {
+  .desktop-nav {
+    display: flex;
+  }
+  .hamburger-btn {
+    display: none !important;
+  }
+  .side-drawer,
+  .drawer-backdrop {
+    display: none !important;
+  }
+}
+
+/* On Mobile/Tablet (900px and below): hide desktop navbar, show hamburger */
+@media (max-width: 900px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  .hamburger-btn {
+    display: flex !important;
+  }
+}
+
 /* Header Action Icons on Right */
 .header-actions {
   display: flex;

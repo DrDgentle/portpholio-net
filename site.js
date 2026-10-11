@@ -162,23 +162,50 @@ function injectNavigation(pages, settings) {
 
   navContainer.innerHTML = navHtml;
 
-  // Mobile Hamburger Toggle
+  // Mobile Hamburger Flyout Drawer
   const navHeader = navContainer.closest('.nav');
   if (navHeader && !navHeader.querySelector('.nav-toggle')) {
+    let backdrop = document.querySelector('.nav-backdrop');
+    if (!backdrop) {
+      backdrop = document.createElement('div');
+      backdrop.className = 'nav-backdrop';
+      document.body.appendChild(backdrop);
+    }
+
     const toggleBtn = document.createElement('button');
     toggleBtn.className = 'nav-toggle';
     toggleBtn.type = 'button';
-    toggleBtn.setAttribute('aria-label', 'Toggle Menu');
+    toggleBtn.setAttribute('aria-label', 'Toggle Navigation Menu');
     toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
-    
+
+    function closeFlyout() {
+      navContainer.classList.remove('open');
+      backdrop.classList.remove('open');
+      document.body.style.overflow = '';
+      toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+    }
+
+    function openFlyout() {
+      navContainer.classList.add('open');
+      backdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+    }
+
     toggleBtn.onclick = function() {
-      navContainer.classList.toggle('open');
       if (navContainer.classList.contains('open')) {
-        toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+        closeFlyout();
       } else {
-        toggleBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+        openFlyout();
       }
     };
+
+    backdrop.onclick = closeFlyout;
+
+    navContainer.querySelectorAll('a').forEach(a => {
+      a.onclick = closeFlyout;
+    });
+
     navHeader.appendChild(toggleBtn);
   }
 }

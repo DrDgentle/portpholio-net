@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DgentleMedTech | Medical Technology & Healthcare Digital Innovation</title>
+<meta name="description" content="Precision medical technology and digital systems designed for clinical teams, hospital workflows, and modern med-tech interfaces.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body data-page="home">
+
+<!-- Background Reactive Motion & Aurora Orbs -->
+<canvas id="bgCanvas"></canvas>
+<div class="bg-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="bg-grid" aria-hidden="true"></div>
+
+<div class="wrap">
+  <!-- Top Navigation Header -->
+  <header class="nav glass">
+    <a class="brand" href="/" data-s="companyName">
+      <span class="brand-dot"></span>
+      DgentleMedTech
+    </a>
+    <nav aria-label="Main">
+      <a href="/" aria-current="page">Home</a>
+      <a href="/about">About</a>
+      <a href="/projects">Projects</a>
+      <a href="/blog">Blog</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="glass panel hero">
+      <div>
+        <span class="badge" data-s="tagline">Next-Gen Medical Innovation</span>
+        <h1 data-s="heroTitle">Medical technology, designed with care.</h1>
+        <p data-s="heroText">We design and build software and digital tools for healthcare teams, from clinical workflows to device interfaces.</p>
+        <div class="hero-cta">
+          <a class="btn" href="/projects">View Clinical Work &rarr;</a>
+          <a class="btn ghost" href="/contact">Initiate Consultation</a>
+        </div>
+      </div>
+      <div class="telemetry-stack" aria-hidden="true">
+        <div class="telemetry-card">
+          <div class="header-row">
+            <span class="status-indicator">Active Telemetry</span>
+            <small style="color:var(--faint)">99.99% Uptime</small>
+          </div>
+          <strong>Clinical Workstation Hub</strong>
+          <span>Zero-latency physiologic signal monitoring tailored for critical care units.</span>
+        </div>
+        <div class="telemetry-card">
+          <div class="header-row">
+            <span class="status-indicator">Hardware Sync</span>
+            <small style="color:var(--faint)">ISO 13485</small>
+          </div>
+          <strong>Ergonomic Device Interfaces</strong>
+          <span>High-contrast, fail-safe touch panels designed for sterile surgical environments.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <div class="section-head">
+      <div>
+        <span class="badge">Portfolio Highlights</span>
+        <h2>Featured Medical Engineering</h2>
+      </div>
+      <a href="/projects">Browse all projects &rarr;</a>
+    </div>
+    <section id="projects" class="grid" data-featured="1" data-limit="3"></section>
+
+    <!-- Latest Insights / Blog Section -->
+    <div class="section-head">
+      <div>
+        <span class="badge">Clinical Tech Knowledge</span>
+        <h2>Latest Research & Articles</h2>
+      </div>
+      <a href="/blog">Explore all articles &rarr;</a>
+    </div>
+    <section id="blogPosts" class="grid" data-featured="1" data-limit="3"></section>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="footer">
+    <div id="social" class="social"></div>
+    <p>&copy; 2026 <span data-s="companyName">DgentleMedTech</span>. Clinical-grade engineering for healthcare environments.</p>
+  </footer>
+</div>
+
+<script src="/site.js"></script>
+</body>
+</html>

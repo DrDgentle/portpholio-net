@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact & Inquiries | DgentleMedTech</title>
+<meta name="description" content="Reach out to DgentleMedTech for clinical software partnerships, medical device UI engineering, or technological consultations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body data-page="contact">
+
+<!-- Background Reactive Motion & Aurora Orbs -->
+<canvas id="bgCanvas"></canvas>
+<div class="bg-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="bg-grid" aria-hidden="true"></div>
+
+<div class="wrap">
+  <header class="nav glass">
+    <a class="brand" href="/" data-s="companyName">
+      <span class="brand-dot"></span>
+      DgentleMedTech
+    </a>
+    <nav aria-label="Main">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/projects">Projects</a>
+      <a href="/blog">Blog</a>
+      <a href="/contact" aria-current="page">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="glass panel" style="max-width:680px;margin:0 auto">
+      <span class="badge">Direct Communication</span>
+      <h1>Contact Us</h1>
+      <p>Discuss your clinical software initiatives, medical device interface needs, or request a technical consultation. We review all inquiries promptly.</p>
+      
+      <form id="f" novalidate>
+        <div class="field">
+          <label for="name">Your Name or Organization</label>
+          <input id="name" autocomplete="name" maxlength="100" placeholder="e.g. Dr. Jane Smith / Apex Health" required>
+        </div>
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input id="email" type="email" autocomplete="email" maxlength="150" placeholder="name@institution.com" required>
+        </div>
+        <div class="field">
+          <label for="message">Project Description or Medical Use Case</label>
+          <textarea id="message" maxlength="3000" placeholder="Describe your software objectives, clinical workflow requirements, or device specifications..." required></textarea>
+        </div>
+        
+        <!-- Spam honeypot -->
+        <div class="hp" aria-hidden="true">
+          <label for="website">Leave empty</label>
+          <input id="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button id="send" class="btn" type="submit">Submit Inquiry &rarr;</button>
+        <div id="status" class="msg" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div id="social" class="social"></div>
+    <p>&copy; 2026 <span data-s="companyName">DgentleMedTech</span>. Clinical-grade engineering for healthcare environments.</p>
+  </footer>
+</div>
+
+<script src="/site.js"></script>
+<script>
+var f = document.getElementById('f'), btn = document.getElementById('send'), st = document.getElementById('status');
+function show(m, c) { st.textContent = m; st.className = 'msg ' + (c || ''); }
+function done() { btn.disabled = false; btn.innerHTML = 'Submit Inquiry &rarr;'; }
+
+f.addEventListener('submit', function(ev) {
+  ev.preventDefault();
+  var d = {
+    action: 'contact',
+    name: f.name.value.trim(),
+    email: f.email.value.trim(),
+    message: f.message.value.trim(),
+    website: f.website.value
+  };
+
+  if (!d.name || !d.email || !d.message) return show('Please fill in your name, email, and message.', 'err');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) return show('Please enter a valid email address.', 'err');
+  if (API_URL.indexOf('PASTE_') === 0) return show('Please set your Apps Script API_URL in site.js first.', 'err');
+
+  btn.disabled = true;
+  btn.textContent = 'Transmitting securely...';
+  show('');
+
+  api(d).then(function(r) {
+    done();
+    if (r.ok) {
+      f.reset();
+      show('Inquiry received successfully. Our engineering team will follow up promptly.', 'ok');
+    } else {
+      show(r.error || 'Something went wrong during submission.', 'err');
+    }
+  }).catch(function() {
+    done();
+    show('Could not send message. Please verify network connectivity and try again.', 'err');
+  });
+});
+</script>
+</body>
+</html>

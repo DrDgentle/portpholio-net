@@ -1,0 +1,21 @@
+# Netlify Redirects Configuration for Clean URLs
+
+# Dynamic Single Blog Post View
+/post/*  /post.html  200
+/blog/*  /post.html  200
+
+# Dynamic Custom CMS Pages
+/page/*  /page.html  200
+
+# Member Auth & Dashboard
+/auth           /auth.html           200
+/login          /auth.html           200
+/register       /auth.html           200
+/user-dashboard /user-dashboard.html 200
+
+# Standard Clean URL Mapping
+/about    /about.html    200
+/projects /projects.html 200
+/blog     /blog.html     200
+/contact  /contact.html  200
+/admin    /admin.html    200

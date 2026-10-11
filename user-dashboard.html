@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Member Portal | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body data-page="user-dashboard">
+
+<canvas id="bgCanvas"></canvas>
+<div class="bg-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="bg-grid" aria-hidden="true"></div>
+
+<div class="wrap">
+  <header class="nav glass">
+    <a class="brand" href="/" data-s="companyName">
+      <span class="brand-dot"></span>
+      Portfolio
+    </a>
+    <nav aria-label="Main">
+      <a href="/">Home</a>
+      <a href="/projects">Portfolio</a>
+      <a href="/blog">Blog</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="dash-topbar">
+      <div>
+        <span class="badge">Client & Member Area</span>
+        <h1 style="font-size:2rem;margin-bottom:4px" id="welcomeUser">Welcome, Member</h1>
+        <p style="margin:0;font-size:0.95rem" id="userEmailDisplay"></p>
+      </div>
+      <div>
+        <button id="logoutBtn" class="btn ghost danger sm">Sign Out</button>
+      </div>
+    </div>
+
+    <!-- Neat Quick Action Cards Inspired by Reference -->
+    <div class="neat-card-row">
+      <div class="neat-stat-card">
+        <div class="neat-stat-circle">VIP</div>
+        <div class="neat-stat-info">
+          <small>Account Status</small>
+          <strong>Active Member</strong>
+        </div>
+      </div>
+      <div class="neat-stat-card">
+        <div class="neat-stat-circle">&check;</div>
+        <div class="neat-stat-info">
+          <small>Direct Line</small>
+          <strong>Priority Support</strong>
+        </div>
+      </div>
+      <div class="neat-stat-card">
+        <div class="neat-stat-circle">&star;</div>
+        <div class="neat-stat-info">
+          <small>Collaboration</small>
+          <strong>Ready for Projects</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Member Quick Actions -->
+    <div class="section-head" style="margin-top:20px">
+      <h2>Quick Actions</h2>
+    </div>
+    <div class="neat-actions-grid">
+      <a class="neat-action-btn" href="/contact">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        <span>Send Inquiry</span>
+      </a>
+      <a class="neat-action-btn" href="/projects">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        <span>View Portfolio</span>
+      </a>
+      <a class="neat-action-btn" href="/blog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+        <span>Read Articles</span>
+      </a>
+    </div>
+
+    <section class="glass panel" style="padding:32px;margin-top:24px">
+      <h3>Have a project in mind?</h3>
+      <p>Whether you need a custom web application, enterprise cloud workflow, or digital product design, you can directly submit a collaboration brief.</p>
+      <a href="/contact" class="btn">Start a Project Discussion &rarr;</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 <span data-s="companyName">Portfolio</span>. All rights reserved.</p>
+  </footer>
+</div>
+
+<script src="/site.js"></script>
+<script>
+var u = getActiveUser();
+if (!u) {
+  window.location.href = '/auth';
+} else {
+  document.getElementById('welcomeUser').textContent = 'Welcome, ' + u.name;
+  document.getElementById('userEmailDisplay').textContent = u.email;
+}
+
+document.getElementById('logoutBtn').onclick = function() {
+  clearActiveUser();
+  window.location.href = '/';
+};
+</script>
+</body>
+</html>

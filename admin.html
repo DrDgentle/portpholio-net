@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin Dashboard | Portfolio Control Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body data-page="admin">
+
+<!-- Golden dust ambient background -->
+<canvas id="bgCanvas"></canvas>
+<div class="bg-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="bg-grid" aria-hidden="true"></div>
+
+<!-- 1. ADMIN LOGIN VIEW -->
+<section id="login" class="glass panel" style="max-width:440px;margin:80px auto 0;position:relative;z-index:2">
+  <div style="text-align:center;margin-bottom:24px">
+    <span class="badge">Master Key</span>
+    <h1 style="font-size:2.2rem">Admin Access</h1>
+    <p style="font-size:0.92rem">Authenticate to manage your portfolio, toggle user accounts, and review client leads.</p>
+  </div>
+  <form id="lf">
+    <div class="field">
+      <label for="pw">Master Password</label>
+      <input id="pw" type="password" autocomplete="current-password" placeholder="Enter password" required>
+    </div>
+    <button class="btn" style="width:100%" type="submit">Sign In to Dashboard &rarr;</button>
+    <div id="lmsg" class="msg" role="status" aria-live="polite"></div>
+  </form>
+</section>
+
+<!-- 2. FULL NEAT DASHBOARD WITH SIDEBAR MENU -->
+<div id="dash" class="dash-shell" hidden>
+  
+  <!-- Sleek Sidebar Navigation -->
+  <aside class="dash-sidebar">
+    <a class="brand" href="/">
+      <span class="brand-dot"></span>
+      Portfolio OS
+    </a>
+
+    <nav class="dash-menu" role="tablist">
+      <button role="tab" class="active" data-tab="overview">
+        <svg class="dash-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        <span>Overview</span>
+      </button>
+
+      <button role="tab" data-tab="projects">
+        <svg class="dash-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+        <span>Portfolio Items</span>
+      </button>
+
+      <button role="tab" data-tab="users">
+        <svg class="dash-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        <span>Users & Access</span>
+      </button>
+
+      <button role="tab" data-tab="posts">
+        <svg class="dash-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+        <span>Blog Articles</span>
+      </button>
+
+      <button role="tab" data-tab="pages">
+        <svg class="dash-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+        <span>Custom Pages</span>
+      </button>
+
+      <button role="tab" data-tab="messages">
+        <svg class="dash-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        <span>Messages</span>
+      </button>
+
+      <button role="tab" data-tab="settings">
+        <svg class="dash-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <span>Site Settings</span>
+      </button>
+    </nav>
+
+    <div class="dash-sidebar-footer">
+      <a class="btn ghost sm" href="/" target="_blank" style="text-align:center">View Public Site &rarr;</a>
+      <button class="btn ghost sm danger" id="out" type="button">Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- Main Content Space -->
+  <main class="dash-main">
+    
+    <!-- Topbar -->
+    <div class="dash-topbar">
+      <div>
+        <h1 style="font-size:1.6rem;margin-bottom:2px" id="pageHeaderTitle">Dashboard Overview</h1>
+        <small style="color:var(--soft)" id="syncStatus">Connected to Google Sheets Database</small>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px">
+        <span class="badge" id="regBadgeStatus">Registration: Active</span>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         TAB: OVERVIEW (Neat Cards Inspired by Reference)
+         ========================================== -->
+    <div id="tab-overview">
+      <div class="neat-card-row">
+        <div class="neat-stat-card">
+          <div class="neat-stat-circle" id="statProjCount">0</div>
+          <div class="neat-stat-info">
+            <small>Portfolio Items</small>
+            <strong id="statProjCountText">0 Projects</strong>
+          </div>
+        </div>
+
+        <div class="neat-stat-card">
+          <div class="neat-stat-circle" id="statUserCount">0</div>
+          <div class="neat-stat-info">
+            <small>Registered Users</small>
+            <strong id="statUserCountText">0 Members</strong>
+          </div>
+        </div>
+
+        <div class="neat-stat-card">
+          <div class="neat-stat-circle" id="statMsgCount">0</div>
+          <div class="neat-stat-info">
+            <small>Unread Inquiries</small>
+            <strong id="statMsgCountText">0 New</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="section-head" style="margin-top:20px">
+        <h2>Quick Shortcuts</h2>
+      </div>
+      <div class="neat-actions-grid">
+        <div class="neat-action-btn" onclick="switchTab('projects')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <span>Add Project</span>
+        </div>
+        <div class="neat-action-btn" onclick="switchTab('users')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+          <span>Manage Users</span>
+        </div>
+        <div class="neat-action-btn" onclick="switchTab('posts')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+          <span>Write Blog</span>
+        </div>
+        <div class="neat-action-btn" onclick="switchTab('settings')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle></svg>
+          <span>Branding & Colors</span>
+        </div>
+      </div>
+
+      <!-- Quick Registration Switch Panel -->
+      <section class="glass panel" style="padding:28px;margin-top:24px">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px">
+          <div>
+            <h3 style="margin-bottom:6px">Public User Registration Control</h3>
+            <p style="margin:0;font-size:0.95rem">
+              Turn ON to allow visitors to create accounts. Turn OFF to completely hide the registration option from visitors.
+            </p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="quickRegSwitch">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==========================================
+         TAB: PROJECTS (Portfolio Manager)
+         ========================================== -->
+    <div id="tab-projects" hidden>
+      <div class="glass panel" style="padding:28px">
+        <h2 id="pf-title">Add Portfolio Project</h2>
+        <form id="pf">
+          <input type="hidden" id="p_id">
+          <div class="two">
+            <div class="field">
+              <label for="p_title">Project Title</label>
+              <input id="p_title" maxlength="150" placeholder="e.g. Fintech Mobile App & Dashboard" required>
+            </div>
+            <div class="field">
+              <label for="p_category">Category</label>
+              <input id="p_category" maxlength="80" placeholder="e.g. Mobile App, SaaS, Branding">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="p_summary">Project Description</label>
+            <textarea id="p_summary" maxlength="1200" placeholder="Describe the solution, technologies, and client results..."></textarea>
+          </div>
+
+          <div class="two">
+            <div class="field">
+              <label for="p_image">Project Image URL</label>
+              <input id="p_image" type="url" placeholder="https://images.unsplash.com/... or paste link">
+            </div>
+            <div class="field">
+              <label for="p_link">Live Project Link (URL)</label>
+              <input id="p_link" type="url" placeholder="https://yourdemo.com">
+            </div>
+          </div>
+
+          <div class="three">
+            <div class="field">
+              <label for="p_tags">Tags (comma separated)</label>
+              <input id="p_tags" placeholder="react, figma, nodejs">
+            </div>
+            <div class="field">
+              <label for="p_order">Display Order (1 first)</label>
+              <input id="p_order" type="number" min="1" placeholder="1">
+            </div>
+            <div class="field" style="display:flex;align-items:center;padding-top:24px">
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+                <input type="checkbox" id="p_featured"> Feature on Home Page
+              </label>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;margin-top:20px">
+            <button class="btn" type="submit">Save Portfolio Item</button>
+            <button class="btn ghost" type="button" id="pcancel">Clear Form</button>
+          </div>
+          <div id="pmsg" class="msg" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+
+      <div class="glass panel" style="padding:28px;margin-top:24px">
+        <h2>Existing Portfolio Items</h2>
+        <div id="plist"></div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         TAB: USERS & REGISTRATION CONTROLS
+         ========================================== -->
+    <div id="tab-users" hidden>
+      <div class="glass panel" style="padding:28px">
+        <h2>Registration & Access Settings</h2>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:18px;border-radius:var(--radius-md);background:rgba(212,175,55,0.04);border:1px solid var(--border);margin-top:14px">
+          <div>
+            <strong>Allow Public User Registration</strong>
+            <small style="color:var(--soft);display:block;margin-top:4px">
+              When toggled OFF, visitors cannot create new accounts and the "Create Account" tab disappears completely from the site.
+            </small>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="mainRegSwitch">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="glass panel" style="padding:28px;margin-top:24px">
+        <h2>Registered Members</h2>
+        <div id="ulist"></div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         TAB: BLOG POSTS
+         ========================================== -->
+    <div id="tab-posts" hidden>
+      <div class="glass panel" style="padding:28px">
+        <h2 id="post-f-title">Write New Blog Article</h2>
+        <form id="postf">
+          <input type="hidden" id="post_id">
+          <div class="two">
+            <div class="field">
+              <label for="post_title">Article Title</label>
+              <input id="post_title" maxlength="200" placeholder="e.g. Building High-Performance Web Architecture" required>
+            </div>
+            <div class="field">
+              <label for="post_slug">Custom Slug / URL Identifier</label>
+              <input id="post_slug" maxlength="120" placeholder="e.g. web-performance-guide">
+            </div>
+          </div>
+          <div class="two">
+            <div class="field">
+              <label for="post_category">Category</label>
+              <input id="post_category" maxlength="80" placeholder="e.g. Engineering, Design">
+            </div>
+            <div class="field">
+              <label for="post_tags">Tags (comma separated)</label>
+              <input id="post_tags" placeholder="javascript, cloud, ux">
+            </div>
+          </div>
+          <div class="field">
+            <label for="post_summary">Article Summary</label>
+            <textarea id="post_summary" style="min-height:75px" maxlength="1000" placeholder="Short preview text for cards..."></textarea>
+          </div>
+          <div class="field">
+            <label for="post_image">Banner Image URL</label>
+            <input id="post_image" type="url" placeholder="https://...">
+          </div>
+          <div class="field">
+            <label for="post_content">Article Body (Supports Markdown: # Header, **bold**, `code`)</label>
+            <textarea id="post_content" style="min-height:260px" placeholder="Write full article content here..."></textarea>
+          </div>
+          <div class="two">
+            <div class="field">
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+                <input type="checkbox" id="post_featured"> Feature on Home Page
+              </label>
+            </div>
+            <div class="field">
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+                <input type="checkbox" id="post_published" checked> Published (Visible to visitors)
+              </label>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;margin-top:20px">
+            <button class="btn" type="submit">Publish Article</button>
+            <button class="btn ghost" type="button" id="postcancel">Clear Form</button>
+          </div>
+          <div id="postmsg" class="msg" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+
+      <div class="glass panel" style="padding:28px;margin-top:24px">
+        <h2>Published Articles</h2>
+        <div id="postlist"></div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         TAB: CUSTOM PAGES
+         ========================================== -->
+    <div id="tab-pages" hidden>
+      <div class="glass panel" style="padding:28px">
+        <h2 id="page-f-title">Create Custom Page</h2>
+        <form id="pagef">
+          <input type="hidden" id="page_id">
+          <div class="two">
+            <div class="field">
+              <label for="page_title">Page Title</label>
+              <input id="page_title" maxlength="120" placeholder="e.g. Services, Pricing, Case Studies" required>
+            </div>
+            <div class="field">
+              <label for="page_slug">Page URL Slug</label>
+              <input id="page_slug" maxlength="80" placeholder="e.g. services">
+            </div>
+          </div>
+          <div class="field">
+            <label for="page_content">Page Content (HTML or Text)</label>
+            <textarea id="page_content" style="min-height:220px" placeholder="Write full page content here..."></textarea>
+          </div>
+          <div class="two">
+            <div class="field">
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+                <input type="checkbox" id="page_nav" checked> Show in Top Navigation Bar
+              </label>
+            </div>
+            <div class="field">
+              <label for="page_order">Navigation Order</label>
+              <input id="page_order" type="number" min="1" placeholder="1">
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;margin-top:20px">
+            <button class="btn" type="submit">Save Page</button>
+            <button class="btn ghost" type="button" id="pagecancel">Clear Form</button>
+          </div>
+          <div id="pagemsg" class="msg" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+
+      <div class="glass panel" style="padding:28px;margin-top:24px">
+        <h2>Custom Pages</h2>
+        <div id="pagelist"></div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         TAB: MESSAGES
+         ========================================== -->
+    <div id="tab-messages" hidden>
+      <div class="glass panel" style="padding:28px">
+        <h2>Client Inquiries & Messages</h2>
+        <div id="mlist"></div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         TAB: SITE SETTINGS
+         ========================================== -->
+    <div id="tab-settings" hidden>
+      <div class="glass panel" style="padding:28px">
+        <h2>Branding & Website Settings</h2>
+        <form id="sf">
+          <div id="sfields"></div>
+          <div style="margin-top:24px">
+            <button class="btn" type="submit">Update Site Settings</button>
+          </div>
+          <div id="smsg" class="msg" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="/site.js"></script>
+<script>
+var $ = function (id) { return document.getElementById(id); };
+var T = sessionStorage.getItem('adm_tok'), D = null;
+var FIELDS = [
+  ['companyName', 'Website Title / Brand Name'],
+  ['tagline', 'Tagline / Bio'],
+  ['heroTitle', 'Home Headline'],
+  ['heroText', 'Home Introduction', 'area'],
+  ['aboutTitle', 'About Headline'],
+  ['aboutText', 'About Story & Philosophy', 'area'],
+  ['email', 'Public Contact Email'],
+  ['linkedin', 'LinkedIn Link'],
+  ['twitter', 'X / Twitter Link'],
+  ['instagram', 'Instagram Link']
+];
+
+function msg(id, m, c) { var e = $(id); e.textContent = m; e.className = 'msg ' + (c || ''); }
+function logout() { sessionStorage.removeItem('adm_tok'); T = null; $('dash').hidden = true; $('login').hidden = false; }
+
+async function call(b) {
+  var r = await api(Object.assign({ action: 'admin', token: T }, b));
+  if (r.error === 'auth') { logout(); throw new Error('auth'); }
+  return r;
+}
+
+async function load() {
+  D = await call({ op: 'list' });
+  draw();
+}
+
+async function start() {
+  $('login').hidden = true;
+  $('dash').hidden = false;
+  try { await load(); } catch (e) {}
+}
+
+// Admin login form
+$('lf').onsubmit = async function(e) {
+  e.preventDefault();
+  msg('lmsg', 'Authenticating…');
+  try {
+    var r = await api({ action: 'login', password: $('pw').value });
+    if (!r.ok) return msg('lmsg', r.error || 'Password incorrect.', 'err');
+    T = r.token;
+    sessionStorage.setItem('adm_tok', T);
+    $('pw').value = '';
+    msg('lmsg', '');
+    start();
+  } catch (err) {
+    msg('lmsg', 'Could not reach server. Verify API_URL in site.js.', 'err');
+  }
+};
+$('out').onclick = logout;
+
+// Sidebar navigation switcher
+function switchTab(tabName) {
+  document.querySelectorAll('.dash-menu button').forEach(function(b) {
+    var on = b.dataset.tab === tabName;
+    b.classList.toggle('active', on);
+    var panel = $('tab-' + b.dataset.tab);
+    if (panel) panel.hidden = !on;
+  });
+  var titles = {
+    overview: 'Dashboard Overview',
+    projects: 'Portfolio Projects Manager',
+    users: 'User Accounts & Registration Controls',
+    posts: 'Blog Articles Manager',
+    pages: 'Custom Pages Manager',
+    messages: 'Client Inquiries',
+    settings: 'Site Branding & Settings'
+  };
+  $('pageHeaderTitle').textContent = titles[tabName] || 'Dashboard';
+}
+
+document.querySelectorAll('.dash-menu button').forEach(function(b) {
+  b.onclick = function() { switchTab(b.dataset.tab); };
+});
+
+// Toggle registration handler
+async function handleRegToggle(enable) {
+  try {
+    var r = await call({ op: 'toggleRegistration', allow: enable ? 'yes' : 'no' });
+    if (r.ok) {
+      D = r;
+      draw();
+      sessionStorage.removeItem('pub_cache_v3');
+    }
+  } catch (e) {}
+}
+
+$('quickRegSwitch').onchange = function() { handleRegToggle($('quickRegSwitch').checked); };
+$('mainRegSwitch').onchange = function() { handleRegToggle($('mainRegSwitch').checked); };
+
+function draw() {
+  var pCount = (D.projects || []).length;
+  var uCount = (D.users || []).length;
+  var unread = (D.messages || []).filter(function(m) { return m.status !== 'read'; }).length;
+  var regAllowed = (D.settings && D.settings.allowUserRegistration === 'yes');
+
+  // Stats
+  $('statProjCount').textContent = pCount;
+  $('statProjCountText').textContent = pCount + ' Projects';
+  $('statUserCount').textContent = uCount;
+  $('statUserCountText').textContent = uCount + ' Members';
+  $('statMsgCount').textContent = unread;
+  $('statMsgCountText').textContent = unread + ' Unread';
+
+  // Reg switch sync
+  $('quickRegSwitch').checked = regAllowed;
+  $('mainRegSwitch').checked = regAllowed;
+  $('regBadgeStatus').textContent = regAllowed ? 'Registration: ON' : 'Registration: OFF';
+  $('regBadgeStatus').style.color = regAllowed ? 'var(--gold)' : '#fca5a5';
+
+  // Projects list
+  $('plist').innerHTML = pCount ? D.projects.map(function(p) {
+    return '<div class="admin-table-row"><div><strong>' + esc(p.title) + '</strong><small>' + esc(p.category || 'General') + (p.featured === 'yes' ? ' · <span style="color:var(--gold)">Featured on Home</span>' : '') + '</small></div>' +
+      '<div class="acts"><button class="btn ghost sm" data-act="edit" data-id="' + esc(p.id) + '">Edit</button><button class="btn ghost sm danger" data-act="del" data-id="' + esc(p.id) + '">Delete</button></div></div>';
+  }).join('') : '<p style="color:var(--soft)">No portfolio items added yet.</p>';
+
+  // Users list
+  $('ulist').innerHTML = uCount ? D.users.map(function(u) {
+    return '<div class="admin-table-row"><div><strong>' + esc(u.name) + '</strong> <small>' + esc(u.email) + ' · Joined: ' + formatDate(u.created) + '</small></div>' +
+      '<div class="acts"><button class="btn ghost sm" data-act="ustatus" data-id="' + esc(u.id) + '" data-st="' + (u.status === 'blocked' ? 'active' : 'blocked') + '">' + (u.status === 'blocked' ? 'Activate' : 'Block') + '</button><button class="btn ghost sm danger" data-act="udel" data-id="' + esc(u.id) + '">Delete</button></div></div>';
+  }).join('') : '<p style="color:var(--soft)">No registered users yet.</p>';
+
+  // Posts list
+  $('postlist').innerHTML = (D.posts || []).length ? D.posts.map(function(post) {
+    return '<div class="admin-table-row"><div><strong>' + esc(post.title) + '</strong><small>/post?id=' + esc(post.slug || post.id) + (post.featured === 'yes' ? ' · <span style="color:var(--gold)">Featured</span>' : '') + '</small></div>' +
+      '<div class="acts"><a class="btn ghost sm" href="/post?id=' + encodeURIComponent(post.slug || post.id) + '" target="_blank">View</a><button class="btn ghost sm" data-act="pedit" data-id="' + esc(post.id) + '">Edit</button><button class="btn ghost sm danger" data-act="pdel" data-id="' + esc(post.id) + '">Delete</button></div></div>';
+  }).join('') : '<p style="color:var(--soft)">No blog articles yet.</p>';
+
+  // Pages list
+  $('pagelist').innerHTML = (D.pages || []).length ? D.pages.map(function(pg) {
+    return '<div class="admin-table-row"><div><strong>' + esc(pg.title) + '</strong><small>/page?slug=' + esc(pg.slug || pg.id) + (pg.showInNav === 'yes' ? ' · <span style="color:var(--gold)">In Navigation</span>' : '') + '</small></div>' +
+      '<div class="acts"><a class="btn ghost sm" href="/page?slug=' + encodeURIComponent(pg.slug || pg.id) + '" target="_blank">View</a><button class="btn ghost sm" data-act="pgedit" data-id="' + esc(pg.id) + '">Edit</button><button class="btn ghost sm danger" data-act="pgdel" data-id="' + esc(pg.id) + '">Delete</button></div></div>';
+  }).join('') : '<p style="color:var(--soft)">No custom pages yet.</p>';
+
+  // Messages list
+  $('mlist').innerHTML = (D.messages || []).length ? D.messages.map(function(m) {
+    var isNew = m.status !== 'read';
+    return '<div class="admin-table-row" style="' + (isNew ? 'border-left:4px solid var(--gold);' : '') + '"><div><strong>' + esc(m.name) + '</strong> &lt;<a href="mailto:' + esc(m.email) + '" style="color:var(--gold)">' + esc(m.email) + '</a>&gt;' +
+      '<small>' + esc(new Date(m.timestamp).toLocaleString()) + '</small><p style="margin:8px 0;white-space:pre-wrap;color:var(--ink-secondary)">' + esc(m.message) + '</p></div>' +
+      '<div class="acts"><button class="btn ghost sm" data-act="read" data-id="' + esc(m.id) + '" data-st="' + (isNew ? 'read' : 'new') + '">' + (isNew ? 'Mark Read' : 'Mark Unread') + '</button><button class="btn ghost sm danger" data-act="mdel" data-id="' + esc(m.id) + '">Delete</button></div></div>';
+  }).join('') : '<p style="color:var(--soft)">No inquiries received yet.</p>';
+
+  // Settings
+  $('sfields').innerHTML = FIELDS.map(function(f) {
+    var v = esc((D.settings && D.settings[f[0]]) || ''), id = 's_' + f[0];
+    var input = f[2] === 'area' ? '<textarea id="' + id + '">' + v + '</textarea>' : '<input id="' + id + '" type="text" value="' + v + '">';
+    return '<div class="field"><label for="' + id + '">' + f[1] + '</label>' + input + '</div>';
+  }).join('');
+}
+
+// Project Form Handlers
+function clearProjectForm() {
+  $('pf').reset(); $('p_id').value = ''; $('pf-title').textContent = 'Add Portfolio Project';
+}
+$('pcancel').onclick = clearProjectForm;
+
+$('pf').onsubmit = async function(e) {
+  e.preventDefault(); msg('pmsg', 'Saving project…');
+  try {
+    var r = await call({
+      op: 'saveProject',
+      project: {
+        id: $('p_id').value, title: $('p_title').value, category: $('p_category').value, summary: $('p_summary').value,
+        image: $('p_image').value, link: $('p_link').value, tags: $('p_tags').value, order: $('p_order').value,
+        featured: $('p_featured').checked ? 'yes' : 'no'
+      }
+    });
+    if (!r.ok) return msg('pmsg', r.error, 'err');
+    D = r; draw(); clearProjectForm(); msg('pmsg', 'Project saved successfully and live on portfolio!', 'ok');
+  } catch (x) { if (x.message !== 'auth') msg('pmsg', 'Could not save. Try again.', 'err'); }
+};
+
+// Post Form Handlers
+function clearPostForm() {
+  $('postf').reset(); $('post_id').value = ''; $('post-f-title').textContent = 'Write New Blog Article';
+}
+$('postcancel').onclick = clearPostForm;
+
+$('postf').onsubmit = async function(e) {
+  e.preventDefault(); msg('postmsg', 'Saving article…');
+  try {
+    var r = await call({
+      op: 'savePost',
+      post: {
+        id: $('post_id').value, title: $('post_title').value, slug: $('post_slug').value, category: $('post_category').value,
+        summary: $('post_summary').value, content: $('post_content').value, image: $('post_image').value, tags: $('post_tags').value,
+        featured: $('post_featured').checked ? 'yes' : 'no', published: $('post_published').checked ? 'yes' : 'no'
+      }
+    });
+    if (!r.ok) return msg('postmsg', r.error, 'err');
+    D = r; draw(); clearPostForm(); msg('postmsg', 'Article published successfully!', 'ok');
+  } catch (x) { if (x.message !== 'auth') msg('postmsg', 'Could not save article.', 'err'); }
+};
+
+// Page Form Handlers
+function clearPageForm() {
+  $('pagef').reset(); $('page_id').value = ''; $('page-f-title').textContent = 'Create Custom Page';
+}
+$('pagecancel').onclick = clearPageForm;
+
+$('pagef').onsubmit = async function(e) {
+  e.preventDefault(); msg('pagemsg', 'Saving page…');
+  try {
+    var r = await call({
+      op: 'savePage',
+      page: {
+        id: $('page_id').value, title: $('page_title').value, slug: $('page_slug').value, content: $('page_content').value,
+        showInNav: $('page_nav').checked ? 'yes' : 'no', order: $('page_order').value
+      }
+    });
+    if (!r.ok) return msg('pagemsg', r.error, 'err');
+    D = r; draw(); clearPageForm(); msg('pagemsg', 'Page saved successfully!', 'ok');
+  } catch (x) { if (x.message !== 'auth') msg('pagemsg', 'Could not save page.', 'err'); }
+};
+
+// Settings Form Handlers
+$('sf').onsubmit = async function(e) {
+  e.preventDefault(); msg('smsg', 'Updating settings…');
+  var s = {}; FIELDS.forEach(function(f) { s[f[0]] = $('s_' + f[0]).value; });
+  try {
+    var r = await call({ op: 'saveSettings', settings: s });
+    if (!r.ok) return msg('smsg', r.error, 'err');
+    D = r; draw(); sessionStorage.removeItem('pub_cache_v3'); msg('smsg', 'Settings updated successfully.', 'ok');
+  } catch (x) { if (x.message !== 'auth') msg('smsg', 'Could not save settings.', 'err'); }
+};
+
+// Event delegation for actions
+document.addEventListener('click', async function(e) {
+  var b = e.target.closest('[data-act]'); if (!b) return;
+  var a = b.dataset.act, id = b.dataset.id;
+  try {
+    if (a === 'edit') {
+      var p = (D.projects || []).find(function(x) { return String(x.id) === id; }); if (!p) return;
+      $('p_id').value = p.id; $('p_title').value = p.title; $('p_category').value = p.category; $('p_summary').value = p.summary;
+      $('p_image').value = p.image; $('p_link').value = p.link; $('p_tags').value = p.tags; $('p_order').value = p.order;
+      $('p_featured').checked = p.featured === 'yes';
+      $('pf-title').textContent = 'Edit Portfolio Project';
+      switchTab('projects');
+    } else if (a === 'del') {
+      if (confirm('Delete this project?')) { D = await call({ op: 'deleteProject', id: id }); draw(); }
+    } else if (a === 'pedit') {
+      var post = (D.posts || []).find(function(x) { return String(x.id) === id; }); if (!post) return;
+      $('post_id').value = post.id; $('post_title').value = post.title; $('post_slug').value = post.slug;
+      $('post_category').value = post.category; $('post_tags').value = post.tags; $('post_summary').value = post.summary;
+      $('post_content').value = post.content; $('post_image').value = post.image;
+      $('post_featured').checked = post.featured === 'yes'; $('post_published').checked = post.published !== 'no';
+      $('post-f-title').textContent = 'Edit Article';
+      switchTab('posts');
+    } else if (a === 'pdel') {
+      if (confirm('Delete this article?')) { D = await call({ op: 'deletePost', id: id }); draw(); }
+    } else if (a === 'pgedit') {
+      var pg = (D.pages || []).find(function(x) { return String(x.id) === id; }); if (!pg) return;
+      $('page_id').value = pg.id; $('page_title').value = pg.title; $('page_slug').value = pg.slug;
+      $('page_content').value = pg.content; $('page_nav').checked = pg.showInNav === 'yes'; $('page_order').value = pg.order;
+      $('page-f-title').textContent = 'Edit Page';
+      switchTab('pages');
+    } else if (a === 'pgdel') {
+      if (confirm('Delete this page?')) { D = await call({ op: 'deletePage', id: id }); draw(); }
+    } else if (a === 'ustatus') {
+      D = await call({ op: 'setUserStatus', id: id, status: b.dataset.st }); draw();
+    } else if (a === 'udel') {
+      if (confirm('Delete this user account?')) { D = await call({ op: 'deleteUser', id: id }); draw(); }
+    } else if (a === 'read') {
+      D = await call({ op: 'setMessageStatus', id: id, status: b.dataset.st }); draw();
+    } else if (a === 'mdel') {
+      if (confirm('Delete this message?')) { D = await call({ op: 'deleteMessage', id: id }); draw(); }
+    }
+  } catch (x) {}
+});
+
+if (T) start();
+</script>
+</body>
+</html>

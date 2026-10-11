@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About | DgentleMedTech</title>
+<meta name="description" content="Learn more about DgentleMedTech and our mission to engineer intuitive, robust digital tools for medical practitioners and hospitals.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body data-page="about">
+
+<!-- Background Reactive Motion & Aurora Orbs -->
+<canvas id="bgCanvas"></canvas>
+<div class="bg-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="bg-grid" aria-hidden="true"></div>
+
+<div class="wrap">
+  <header class="nav glass">
+    <a class="brand" href="/" data-s="companyName">
+      <span class="brand-dot"></span>
+      DgentleMedTech
+    </a>
+    <nav aria-label="Main">
+      <a href="/">Home</a>
+      <a href="/about" aria-current="page">About</a>
+      <a href="/projects">Projects</a>
+      <a href="/blog">Blog</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="glass panel">
+      <span class="badge">Our Mission & Standards</span>
+      <h1 data-s="aboutTitle">About DgentleMedTech</h1>
+      <p data-s="aboutText" style="font-size:1.15rem;line-height:1.8">
+        DgentleMedTech is a medical technology company specializing in clinical software design, telemedicine architecture, and hardware interface engineering. Edit this text anytime from the admin dashboard to personalize your company story.
+      </p>
+
+      <div class="grid" style="margin-top:36px">
+        <div class="glass card" style="background:var(--bg-card);border:1px solid var(--border)">
+          <div class="body">
+            <div class="cat">Core Principle</div>
+            <h3>Clinician Ergonomics</h3>
+            <p>Every interface is engineered to eliminate cognitive friction, streamline critical decision paths, and ensure patient safety.</p>
+          </div>
+        </div>
+        <div class="glass card" style="background:var(--bg-card);border:1px solid var(--border)">
+          <div class="body">
+            <div class="cat">Safety Standard</div>
+            <h3>Deterministic Telemetry</h3>
+            <p>Reliable real-time data streaming architectures designed for zero dropouts in intensive care and surgical telemetry environments.</p>
+          </div>
+        </div>
+        <div class="glass card" style="background:var(--bg-card);border:1px solid var(--border)">
+          <div class="body">
+            <div class="cat">Compliance</div>
+            <h3>Regulatory Alignment</h3>
+            <p>Adherence to HIPAA, GDPR health provisions, and ISO medical device software lifecycle standards (IEC 62304).</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:40px">
+        <a class="btn" href="/contact">Initiate Collaboration &rarr;</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div id="social" class="social"></div>
+    <p>&copy; 2026 <span data-s="companyName">DgentleMedTech</span>. Clinical-grade engineering for healthcare environments.</p>
+  </footer>
+</div>
+
+<script src="/site.js"></script>
+</body>
+</html>

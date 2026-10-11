@@ -1049,10 +1049,13 @@ input:checked + .slider:before {
 /* ==========================================================================
    Responsive Adaptations
    ========================================================================== */
+/* ==========================================================================
+   Responsive Adaptations & Mobile Experience
+   ========================================================================== */
 @media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; }
-  .telemetry-stack { height: 260px; margin-top: 10px; }
-  .two, .three { grid-template-columns: 1fr; }
+  .hero { grid-template-columns: 1fr; gap: 28px; }
+  .telemetry-stack { height: 260px; margin-top: 10px; width: 100%; }
+  .two, .three { grid-template-columns: 1fr; gap: 14px; }
   
   .dash-shell { flex-direction: column; }
   .dash-sidebar {
@@ -1060,10 +1063,114 @@ input:checked + .slider:before {
     position: relative;
     border-right: 0;
     border-bottom: 1px solid var(--border);
+    padding: 16px;
+  }
+  .dash-sidebar .brand {
+    margin-bottom: 14px;
+  }
+  .dash-menu {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    gap: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .dash-menu button {
+    white-space: nowrap;
+    padding: 9px 14px;
+    font-size: 0.88rem;
+    flex-shrink: 0;
+  }
+  .dash-sidebar-footer {
+    display: none;
   }
   .dash-main {
     margin-left: 0;
     max-width: 100vw;
-    padding: 24px 18px;
+    padding: 20px 14px 60px;
+  }
+  .dash-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .wrap {
+    padding: 14px 14px 50px;
+  }
+  .panel {
+    padding: 22px 16px;
+    border-radius: var(--radius-lg);
+  }
+  .nav {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    gap: 12px;
+  }
+  .nav .brand {
+    justify-content: center;
+  }
+  .nav nav {
+    justify-content: center;
+    gap: 4px;
+  }
+  .nav nav a {
+    padding: 6px 12px;
+    font-size: 0.84rem;
+  }
+  h1 {
+    font-size: 2.1rem;
+    line-height: 1.15;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  .hero-cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-cta .btn {
+    width: 100%;
+    text-align: center;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .neat-card-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .neat-stat-card {
+    padding: 16px 18px;
+  }
+  .neat-actions-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .neat-action-btn {
+    padding: 14px 10px;
+    font-size: 0.84rem;
+  }
+  .admin-table-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px;
+  }
+  .admin-table-row .acts {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .card-img-wrap {
+    height: 180px;
+  }
+  .card .body {
+    padding: 18px 18px 20px;
   }
 }
